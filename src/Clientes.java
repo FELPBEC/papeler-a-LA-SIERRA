@@ -2,15 +2,15 @@ public class Clientes{
     private String nombre;
     private Productos productoAComprar;
     private double presupuesto;
-    private boolean esDeudor;
-    private int Cantidad;
+    private double dineroDeduda;
+    private int cantidadAComprar;
     
-    public Clientes(String nombre, Productos productoAComprar, double presupuesto, boolean esDeudor, int Cantidad) {
+    public Clientes(String nombre, Productos productoAComprar, double presupuesto, double dineroDeduda, int cantidadAComprar) {
         this.nombre = nombre;
         this.productoAComprar = productoAComprar;
         this.presupuesto = presupuesto;
-        this.esDeudor = esDeudor;
-        this.Cantidad = Cantidad;
+        this.dineroDeduda = dineroDeduda;
+        this.cantidadAComprar = cantidadAComprar;
     }
     
     public String getNombre() {
@@ -31,11 +31,22 @@ public class Clientes{
     public void setPresupuesto(double presupuesto) {
         this.presupuesto = presupuesto;
     }
-    public boolean isEsDeudor() {
-        return esDeudor;
+
+    public double getDineroDeduda() {
+        return dineroDeduda;
     }
-    public void setEsDeudor(boolean esDeudor) {
-        this.esDeudor = esDeudor;
+
+    public void setDineroDeduda(double dineroDeduda) {
+        this.dineroDeduda = dineroDeduda;
     }
+
+    public int getCantidadAComprar() {
+        return cantidadAComprar;
+    }
+
+    public void setCantidadAComprar(int cantidadAComprar) {
+        this.cantidadAComprar = cantidadAComprar;
+    }
+
 
 }
