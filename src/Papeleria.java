@@ -25,19 +25,19 @@ public String MostrarClientes(){
     }
     return listaClientes;
 }
-public String NuevoProducto(String nombreProducto, double precio, String tipoProducto, int existencias){
+public String NuevoProducto(String nombreProducto, double precio, byte tipoProducto, int existencias){
     /*Se ingresa un nuevo produco al inventario */
     productos.add(new Productos(nombreProducto, precio, tipoProducto, existencias) );
     return "Se agrego el producto exitosamente";   
     }
-public String Inventario(){
-    /*Muestra todos los clientes existentes,
-     sirve principalmente para identificar deudores
-     * 
-     */
+public String Inventario( byte tipoProducto){
+    
     String inventario="";
     for (int i = 0; i < productos.size(); i++) {
-        inventario+=" "+productos.get(i).getNombreProducto() +"          "+productos.get(i).getExistencias()+"          "+productos.get(i).getPrecio() + "\n";
+        if (tipoProducto==productos.get(i).getTipoProducto()) {
+            inventario+=" "+productos.get(i).getNombreProducto() +"          "+productos.get(i).getExistencias()+"          "+productos.get(i).getPrecio() + "\n";
+        }
+        
 }
 return "Nombre:          existencias:               precio "+"\n"+inventario;
 }

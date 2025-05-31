@@ -1,9 +1,9 @@
 public class Productos {
     private String nombreProducto;
     private double precio;
-    private String tipoProducto;
+    private byte tipoProducto;
     private int existencias;
-    public Productos(String nombreProducto, double precio, String tipoProducto, int existencias) {
+    public Productos(String nombreProducto, double precio, byte tipoProducto, int existencias) {
         this.nombreProducto = nombreProducto;
         this.precio = precio;
         this.tipoProducto = tipoProducto;
@@ -21,17 +21,17 @@ public class Productos {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-    public String getTipoProducto() {
-        return tipoProducto;
-    }
-    public void setTipoProducto(String tipoProducto) {
-        this.tipoProducto = tipoProducto;
-    }
     public int getExistencias() {
         return existencias;
     }
     public void setExistencias(int existencias) {
         this.existencias = existencias;
+    }
+    public byte getTipoProducto() {
+        return tipoProducto;
+    }
+    public void setTipoProducto(byte tipoProducto) {
+        this.tipoProducto = tipoProducto;
     }
 
 }
