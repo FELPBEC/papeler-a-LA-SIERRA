@@ -1,16 +1,14 @@
 public class Clientes{
     private String nombre;
-    private Productos productoAComprar;
+    private String id;
     private double presupuesto;
     private double dineroDeduda;
-    private int cantidadAComprar;
     
-    public Clientes(String nombre, Productos productoAComprar, double presupuesto, double dineroDeduda, int cantidadAComprar) {
+    public Clientes(String nombre,String id, double presupuesto) {
         this.nombre = nombre;
-        this.productoAComprar = productoAComprar;
         this.presupuesto = presupuesto;
-        this.dineroDeduda = dineroDeduda;
-        this.cantidadAComprar = cantidadAComprar;
+        this.dineroDeduda = 0;
+        this.id=id;
     }
     
     public String getNombre() {
@@ -18,12 +16,6 @@ public class Clientes{
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-    public Productos getProductoAComprar() {
-        return productoAComprar;
-    }
-    public void setProductoAComprar(Productos productoAComprar) {
-        this.productoAComprar = productoAComprar;
     }
     public double getPresupuesto() {
         return presupuesto;
@@ -39,13 +31,12 @@ public class Clientes{
     public void setDineroDeduda(double dineroDeduda) {
         this.dineroDeduda = dineroDeduda;
     }
-
-    public int getCantidadAComprar() {
-        return cantidadAComprar;
+    public String getId() {
+        return id;
     }
 
-    public void setCantidadAComprar(int cantidadAComprar) {
-        this.cantidadAComprar = cantidadAComprar;
+    public void setId(String id) {
+        this.id = id;
     }
 
 
