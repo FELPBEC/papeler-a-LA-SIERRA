@@ -54,17 +54,58 @@ public class App {
                     
                     break;
                 case 2:
-                opcion=Byte.parseByte(JOptionPane.showInputDialog("BIENVENIDO A GESTION DE INVENTARIO"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Agregar nuevo cliente"+"\n"+"2.Visualizar la lista de clientes"));
+                opcion=Byte.parseByte(JOptionPane.showInputDialog("BIENVENIDO A GESTION DE CLIENTES"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Agregar nuevo cliente"+"\n"+"2.Visualizar la lista de clientes"));
                 switch (opcion) {
                     case 1:
                     String id = JOptionPane.showInputDialog("Ingrese la id del nuevo cliente");
+                    if (LaSierra.EncontrarCliente(id)) {
+                        JOptionPane.showMessageDialog(null, "El usuario YA existe");
+                    }else{
                     String nombre = JOptionPane.showInputDialog("Ingrese el nombre del nuevo cliente");
                     String apellido = JOptionPane.showInputDialog("Ingrese el apellido del nuevo cliente");
                     JOptionPane.showMessageDialog(null,LaSierra.NuevoCliente(nombre,apellido,id));
-                        
+                    }
                         break;
                     case 2:
                     JOptionPane.showMessageDialog(null, LaSierra.MostrarClientes());
+                    break;
+                    default:
+                        break;
+                }
+                break;
+                case 3:
+                opcion=Byte.parseByte(JOptionPane.showInputDialog("BIENVENIDO AL SISTEMA DE VENTAS"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Hacer nueva venta"+"\n"+"2.Saldar una deuda"));
+                switch (opcion) {
+                    case 1:
+                        double costoInicial=0;
+                        String id = JOptionPane.showInputDialog("Ingrese la id del cliente");
+                        if (LaSierra.EncontrarCliente(id)) {
+                            do {
+                                String nombreProducto = JOptionPane.showInputDialog("Ingrese el nombre del producto a comprar");
+                            if (LaSierra.EncontrarProducto(nombreProducto)) {
+                                int cantidadComprar = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de "));
+                                costoInicial+=LaSierra.CalcularCosto(nombreProducto, cantidadComprar);
+                            }else{
+                                JOptionPane.showMessageDialog(null,"No se encontro el producto en el inventario");
+                            }
+                            opcion=Byte.parseByte(JOptionPane.showInputDialog("¿Desea seguir añadiendo articulos a la compra?"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Si"+"\n"+"2.No"));
+                            } while (opcion!=2);
+                        JOptionPane.showMessageDialog(null,"El costo de su compra es: " + costoInicial);
+                        double presupuestoUsuario= Double.parseDouble(JOptionPane.showInputDialog("Ingrese el presupuesto del usuario(Con cuanto le paga)"));
+                        if (presupuestoUsuario<costoInicial) {
+                            JOptionPane.showMessageDialog(null,"No le alcanza"+"\n"+"Si confirma la compra a continuación se le añadira a su deuda");
+                        }
+                        opcion=Byte.parseByte(JOptionPane.showInputDialog("¿Confirma la compra?"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Si"+"\n"+"2.No"));
+                            if (opcion==1) {
+                               if (presupuestoUsuario<costoInicial) {
+                            double deuda = costoInicial-presupuestoUsuario;
+                            JOptionPane.showMessageDialog(null, LaSierra.AñadirDeuda(id,deuda));
+                                } 
+                            }
+                        }
+                        break;
+                    case 2:
+
                     break;
                     default:
                         break;
