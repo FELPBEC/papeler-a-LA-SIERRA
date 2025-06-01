@@ -8,11 +8,19 @@ public class Papeleria {
         this.productos=new ArrayList<Productos>();
     }
 public String NuevoCliente(String nombre,String apellido,String id){
-    /*Se crea un nuevo cliente,
-     * 
-     */
-    clientes.add(new Clientes(nombre,apellido, id));
-    return "Se agrego el cliente exitosamente";   
+    //Se crea un nuevo cliente,
+    boolean seEncontro=false;
+    for (int i = 0; i < clientes.size(); i++) {
+        if (id.equals(clientes.get(i).getId())) {
+            seEncontro=true;
+        }
+    }
+    if (seEncontro) {
+        
+    }else{
+        clientes.add(new Clientes(nombre, apellido, id));
+    }
+    return (seEncontro?"el cliente ya existe":"cliente agregado exitosamente");   
     }
 public String MostrarClientes(){
     /*Muestra todos los clientes existentes,
@@ -23,7 +31,7 @@ public String MostrarClientes(){
     for (int i = 0; i < clientes.size(); i++) {
         listaClientes+=clientes.get(i).getNombre()+" "+clientes.get(i).getId()+" "+(clientes.get(i).getDineroDeduda()>0?"EL CLIENTE ES DEUDOR, y su deuda es de"+clientes.get(i).getDineroDeduda():"EL CLIENTE NO ES DEUDOR")+"\n";
     }
-    return listaClientes;
+    return "Nombre:          id               ¿es deudor? "+"\n"+listaClientes;
 }
 public String NuevoProducto(String nombreProducto, double precio, byte tipoProducto, int existencias){
     /*Se ingresa un nuevo produco al inventario */

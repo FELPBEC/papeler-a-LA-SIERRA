@@ -7,7 +7,6 @@ public class Clientes{
     public Clientes(String nombre,String apellido,String id) {
         this.nombre = nombre;
         this.apellido= apellido;
-        this.dineroDeduda = 0;
         this.id=id;
     }
     
