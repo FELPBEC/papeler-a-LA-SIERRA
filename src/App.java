@@ -16,7 +16,10 @@ public class App {
                     switch (opcion) {
                         case 1:
                                 String nombreProducto = JOptionPane.showInputDialog("Ingrese el nombre del nuevo producto");
-                                double precioProducto = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto"));
+                                if (LaSierra.EncontrarProducto(nombreProducto)) {
+                                    JOptionPane.showMessageDialog(null, "El producto YA EXISTE");
+                                }else{
+                                         double precioProducto = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto"));
                                 do {
                                     tipoProducto = Byte.parseByte(JOptionPane.showInputDialog("Ingrese un NUMERO para indicar el tipo de producto" + "\n"+
                                     "1. Papeles"+ "\n"+
@@ -27,13 +30,23 @@ public class App {
                                  } while(tipoProducto>5);
                                  int existencias = Integer.parseInt(JOptionPane.showInputDialog("Ingrese las unidades del nuevo producto"));
                                 JOptionPane.showMessageDialog(null, LaSierra.NuevoProducto(nombreProducto, precioProducto, tipoProducto, existencias));
+                                }
+                               
                             break;
+
+
                         case 2:
                                 nombreProducto=JOptionPane.showInputDialog("Ingrese el nombre del producto al que le sumara unidades");
-                                int nuevasExistencias=Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de unidades que desea agregar"));
-                                JOptionPane.showMessageDialog(null, LaSierra.AgregarExistencias(nombreProducto, nuevasExistencias));
-                        
+                                if (LaSierra.EncontrarProducto(nombreProducto)) {
+                                    int nuevasExistencias=Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de unidades que desea agregar"));
+                                    JOptionPane.showMessageDialog(null, LaSierra.AgregarExistencias(nombreProducto, nuevasExistencias));
+                                }else{
+                                    JOptionPane.showMessageDialog(null, "El producto NO EXISTE o lo escribio mal");
+                                }
                         break;
+
+
+
                         case 3:
                             do {
                                 seleccionInventario = Byte.parseByte(JOptionPane.showInputDialog("Ingrese un NUMERO para indicar el tipo de inventario que desea visualizar" + "\n"+
@@ -53,6 +66,14 @@ public class App {
                     }
                     
                     break;
+
+
+
+
+
+
+
+
                 case 2:
                 opcion=Byte.parseByte(JOptionPane.showInputDialog("BIENVENIDO A GESTION DE CLIENTES"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Agregar nuevo cliente"+"\n"+"2.Visualizar la lista de clientes"));
                 switch (opcion) {
@@ -66,6 +87,7 @@ public class App {
                     JOptionPane.showMessageDialog(null,LaSierra.NuevoCliente(nombre,apellido,id));
                     }
                         break;
+
                     case 2:
                     JOptionPane.showMessageDialog(null, LaSierra.MostrarClientes());
                     break;
@@ -73,17 +95,28 @@ public class App {
                         break;
                 }
                 break;
+
+
+
+
+
+
+
+
+
                 case 3:
                 opcion=Byte.parseByte(JOptionPane.showInputDialog("BIENVENIDO AL SISTEMA DE VENTAS"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Hacer nueva venta"+"\n"+"2.Saldar una deuda"));
                 switch (opcion) {
                     case 1:
-                        double costoInicial=0;
+                    int cantidadComprar=0;
+                    String nombreProducto="";
+                    double costoInicial=0;
                         String id = JOptionPane.showInputDialog("Ingrese la id del cliente");
                         if (LaSierra.EncontrarCliente(id)) {
                             do {
-                                String nombreProducto = JOptionPane.showInputDialog("Ingrese el nombre del producto a comprar");
+                                 nombreProducto = JOptionPane.showInputDialog("Ingrese el nombre del producto a comprar");
                             if (LaSierra.EncontrarProducto(nombreProducto)) {
-                                int cantidadComprar = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de "));
+                                cantidadComprar = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de unidades a comprar"));
                                 costoInicial+=LaSierra.CalcularCosto(nombreProducto, cantidadComprar);
                             }else{
                                 JOptionPane.showMessageDialog(null,"No se encontro el producto en el inventario");
@@ -97,11 +130,15 @@ public class App {
                         }
                         opcion=Byte.parseByte(JOptionPane.showInputDialog("¿Confirma la compra?"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Si"+"\n"+"2.No"));
                             if (opcion==1) {
+                            JOptionPane.showMessageDialog(null,LaSierra.AgregarExistencias(nombreProducto, cantidadComprar*-1));
                                if (presupuestoUsuario<costoInicial) {
                             double deuda = costoInicial-presupuestoUsuario;
                             JOptionPane.showMessageDialog(null, LaSierra.AñadirDeuda(id,deuda));
                                 } 
                             }
+                            JOptionPane.showMessageDialog(null, "Tenga un lindo día, a la ORDEN");
+                        }else{
+                            JOptionPane.showMessageDialog(null, "No se encontro a un cliente con es ID, vuelva al menú y agreguelo");
                         }
                         break;
                     case 2:

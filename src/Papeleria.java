@@ -68,13 +68,12 @@ public String Inventario( byte tipoProducto){
 return "Nombre:          existencias:               precio "+"\n"+inventario;
 }
 public String AgregarExistencias(String nombreProducto, int nuevasExistencias){
-    boolean seEncontro=false;
     for (int i = 0; i < productos.size(); i++) {
             int unidadesExistentes = productos.get(i).getExistencias();
             unidadesExistentes+=nuevasExistencias;
             productos.get(i).setExistencias(unidadesExistentes);
         }
-    return (seEncontro?"Unidades añadidas correctamente":"NO SE ENCONTRO EL PRODUCTO");
+    return "Unidades modificadas correctamente";
 }
 public double CalcularCosto(String nombreProducto, int cantidadComprar){
     double costoParcial=0;
@@ -90,9 +89,10 @@ public double CalcularCosto(String nombreProducto, int cantidadComprar){
 public String AñadirDeuda(String id,double deuda){
     for (int i = 0; i < clientes.size(); i++) {
         if (id.equalsIgnoreCase(clientes.get(i).getId())) {
-            clientes.get(i).setDineroDeduda(deuda);
+            clientes.get(i).setDineroDeduda(deuda+clientes.get(i).getDineroDeduda());
         }
     }
-    return "Deuda añadida correctamente";
+    return "Deuda añadida correctamente, es de: "+deuda;
 }
+
 }
