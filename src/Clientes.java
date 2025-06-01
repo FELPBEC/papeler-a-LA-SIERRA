@@ -1,12 +1,12 @@
 public class Clientes{
     private String nombre;
+    private String apellido;
     private String id;
-    private double presupuesto;
     private double dineroDeduda;
     
-    public Clientes(String nombre,String id, double presupuesto) {
+    public Clientes(String nombre,String apellido,String id) {
         this.nombre = nombre;
-        this.presupuesto = presupuesto;
+        this.apellido= apellido;
         this.dineroDeduda = 0;
         this.id=id;
     }
@@ -17,13 +17,6 @@ public class Clientes{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public double getPresupuesto() {
-        return presupuesto;
-    }
-    public void setPresupuesto(double presupuesto) {
-        this.presupuesto = presupuesto;
-    }
-
     public double getDineroDeduda() {
         return dineroDeduda;
     }
@@ -37,6 +30,14 @@ public class Clientes{
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
 

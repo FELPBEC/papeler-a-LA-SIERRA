@@ -7,11 +7,11 @@ public class Papeleria {
         this.clientes=new ArrayList<Clientes>();
         this.productos=new ArrayList<Productos>();
     }
-public String NuevoCliente(String nombre,String id, double presupuesto){
+public String NuevoCliente(String nombre,String apellido,String id){
     /*Se crea un nuevo cliente,
      * 
      */
-    clientes.add(new Clientes(nombre, id, presupuesto));
+    clientes.add(new Clientes(nombre,apellido, id));
     return "Se agrego el cliente exitosamente";   
     }
 public String MostrarClientes(){
@@ -40,5 +40,17 @@ public String Inventario( byte tipoProducto){
         
 }
 return "Nombre:          existencias:               precio "+"\n"+inventario;
+}
+public String AgregarExistencias(String nombreProducto, int nuevasExistencias){
+    boolean seEncontro=false;
+    for (int i = 0; i < productos.size(); i++) {
+        if (nombreProducto.equalsIgnoreCase(productos.get(i).getNombreProducto())) {
+           seEncontro=true;
+            int unidadesExistentes = productos.get(i).getExistencias();
+            unidadesExistentes+=nuevasExistencias;
+            productos.get(i).setExistencias(unidadesExistentes);
+        }
+    }
+    return (seEncontro?"Unidades añadidas correctamente":"NO SE ENCONTRO EL PRODUCTO");
 }
 }
