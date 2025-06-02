@@ -29,6 +29,24 @@ public boolean EncontrarProducto(String nombreProducto){
    }
    return seEncontro;
 }
+public boolean DeterminarDeudor(String id){
+    boolean deudor = false;
+    for (int i = 0; i < clientes.size(); i++) {
+        if (id.equalsIgnoreCase(clientes.get(i).getId())&& clientes.get(i).getDineroDeduda()>0) {
+            deudor=true;
+        }
+    }
+    return deudor;
+}
+public double DeterminarDeduda(String id){
+    double deuda = 0;
+    for (int i = 0; i < clientes.size(); i++) {
+        if (id.equalsIgnoreCase(clientes.get(i).getId())&& clientes.get(i).getDineroDeduda()>0) {
+            deuda=clientes.get(i).getDineroDeduda();
+        }
+    }
+    return deuda;
+}
 public String NuevoCliente(String nombre,String apellido,String id){
     //Se crea un nuevo cliente con su nombre apellido e id
     clientes.add(new Clientes(nombre, apellido, id));
@@ -86,13 +104,15 @@ public double CalcularCosto(String nombreProducto, int cantidadComprar){
     }
     return costoParcial;
 }
-public String AñadirDeuda(String id,double deuda){
+public String ModificarDeuda(String id,double deuda){
+    double deudaTotal=0;
     for (int i = 0; i < clientes.size(); i++) {
         if (id.equalsIgnoreCase(clientes.get(i).getId())) {
-            clientes.get(i).setDineroDeduda(deuda+clientes.get(i).getDineroDeduda());
+            deudaTotal=clientes.get(i).getDineroDeduda()+deuda;
+            clientes.get(i).setDineroDeduda(deudaTotal);
         }
     }
-    return "Deuda añadida correctamente, es de: "+deuda;
+    return "Deuda modificada correctamente,ahora es de: "+deudaTotal;
 }
 
 }

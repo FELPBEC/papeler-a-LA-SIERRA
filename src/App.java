@@ -6,6 +6,9 @@ public class App {
         byte opcion = 0;
         byte tipoProducto =0;
         byte seleccionInventario = 0;
+        double ingresosPapelería=0;
+        double saldoRecargas=0;
+        double ingresosRecargas=0;
         
         do {
             try {
@@ -107,12 +110,16 @@ public class App {
                 case 3:
                 opcion=Byte.parseByte(JOptionPane.showInputDialog("BIENVENIDO AL SISTEMA DE VENTAS"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Hacer nueva venta"+"\n"+"2.Saldar una deuda"));
                 switch (opcion) {
+
                     case 1:
                     int cantidadComprar=0;
                     String nombreProducto="";
                     double costoInicial=0;
                         String id = JOptionPane.showInputDialog("Ingrese la id del cliente");
                         if (LaSierra.EncontrarCliente(id)) {
+                            if(LaSierra.DeterminarDeudor(id)){
+                                JOptionPane.showMessageDialog(null, "ATENCIÓN"+"\n"+"El usuaro tiene un deuda de: "+LaSierra.DeterminarDeduda(id));
+                            }
                             do {
                                  nombreProducto = JOptionPane.showInputDialog("Ingrese el nombre del producto a comprar");
                             if (LaSierra.EncontrarProducto(nombreProducto)) {
@@ -133,7 +140,11 @@ public class App {
                             JOptionPane.showMessageDialog(null,LaSierra.AgregarExistencias(nombreProducto, cantidadComprar*-1));
                                if (presupuestoUsuario<costoInicial) {
                             double deuda = costoInicial-presupuestoUsuario;
-                            JOptionPane.showMessageDialog(null, LaSierra.AñadirDeuda(id,deuda));
+                            ingresosPapelería+=presupuestoUsuario;
+                            JOptionPane.showMessageDialog(null, LaSierra.ModificarDeuda(id,deuda));
+                                }else{
+                            ingresosPapelería+=costoInicial;
+                            JOptionPane.showMessageDialog(null, "Sus vueltas son: "+(presupuestoUsuario-costoInicial));
                                 } 
                             }
                             JOptionPane.showMessageDialog(null, "Tenga un lindo día, a la ORDEN");
@@ -141,13 +152,63 @@ public class App {
                             JOptionPane.showMessageDialog(null, "No se encontro a un cliente con es ID, vuelva al menú y agreguelo");
                         }
                         break;
+
                     case 2:
+                    id=JOptionPane.showInputDialog("Ingrese la id del usuario");
+                    if (LaSierra.EncontrarCliente(id)) {
+                        if (LaSierra.DeterminarDeudor(id)) {
+                            JOptionPane.showMessageDialog(null, "La deuda de este cliente es de: "+LaSierra.DeterminarDeduda(id));
+                            double saldarDeuda=Double.parseDouble(JOptionPane.showInputDialog("Ingrese la cantidad que quiere abonar paraa saldar la deuda"));
+                            JOptionPane.showMessageDialog(null, LaSierra.ModificarDeuda(id, saldarDeuda*-1));
+                        }else{
+                            JOptionPane.showMessageDialog(null, "El usuario no presenta deuda");
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "NO EXISTE EL CLIENTE, añadalo al vovler al menú");
+                    }
 
                     break;
                     default:
                         break;
                 }
                 break;
+
+
+
+
+
+
+
+                case 4:
+                    opcion=Byte.parseByte(JOptionPane.showInputDialog("BIENVENIDO AL SISTEMA DE RECARGAS"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Hacer nueva venta"+"\n"+"2.Añadir saldo"));
+                    switch (opcion) {
+                    case 1:
+                        opcion=Byte.parseByte(JOptionPane.showInputDialog(null, "ATENCIÓN"+"\n"+"Su saldo es de"+saldoRecargas+"\n"+"¿Seguro desea continuar?"+"1.Si"+"2.No"));
+                        if (opcion==1) {
+                            double costoRecarga=Double.parseDouble(JOptionPane.showInputDialog("Ingrese a continuación la cantidad a recargar"));
+                            if (saldoRecargas>=costoRecarga) {
+                                saldoRecargas-=costoRecarga;
+                                ingresosRecargas+=costoRecarga;
+                                JOptionPane.showMessageDialog(null, "RECARGA REALIZADA CORRECTAMENTE"+"\n"+"El saldo restante es"+saldoRecargas);
+                            }else{
+                                JOptionPane.showMessageDialog(null,"Ocurrio un error, el saldo no es suficiente");
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Regresando al menú");
+                        }
+                        break;
+
+                    case 2:
+                        double recargaSaldo= Double.parseDouble(JOptionPane.showInputDialog("Ingrese el monto que desea depositar al saldo de las recargas"));
+                        saldoRecargas+=recargaSaldo;
+                        JOptionPane.showMessageDialog(null, "Saldo añadido correctamente"+"\n"+"Su saldo actual es de: "+saldoRecargas);
+                    break;
+                        
+                    default:
+                        break;
+                }
+                break;
+                
                 default:
                     break;
             }
