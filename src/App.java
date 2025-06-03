@@ -222,6 +222,9 @@ public class App {
                         break;
                 }
                 break;
+                case 5:
+                    JOptionPane.showMessageDialog(null,"BIENVENIDO A VISUALIZAR GANANCIAS"+"\n"+"Los ingresos de papelería son: "+ingresosPapelería+"\n"+"Sus beneficios son: "+ (ingresosPapelería*0.3)+"\n"+"Los ingresos por recargas son: "+ingresosRecargas+"Sus beneficios son: "+ (ingresosRecargas*0.06)+"\n"+"Sus ingresos totales fueron: "+(ingresosPapelería+ingresosRecargas)+"\n"+"Sus beneficios fueron"+((ingresosPapelería*0.3)+(ingresosRecargas*0.06)));
+                break;
                 
                 default:
                     break;
@@ -230,6 +233,8 @@ public class App {
                 JOptionPane.showMessageDialog(null,"ERROR 220"+"\n"+ "por favor ingrese un valor valido");
             }
         } while (opcion !=6);
+        JOptionPane.showMessageDialog(null,"BIENVENIDO A VISUALIZAR GANANCIAS"+"\n"+"Los ingresos de papelería son: "+ingresosPapelería+"\n"+"Sus beneficios son: "+ (ingresosPapelería*0.3)+"\n"+"Los ingresos por recargas son: "+ingresosRecargas+"Sus beneficios son: "+ (ingresosRecargas*0.06)+"\n"+"Sus ingresos totales fueron: "+(ingresosPapelería+ingresosRecargas)+"\n"+"Sus beneficios fueron"+((ingresosPapelería*0.3)+(ingresosRecargas*0.06)));
+        JOptionPane.showMessageDialog(null,"ADIOOOOOS");
     }
     }
 
