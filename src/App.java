@@ -2,28 +2,35 @@ import javax.swing.JOptionPane;
 
 public class App {
     public static void main(String[] args) {
-        Papeleria LaSierra = new Papeleria();
-        byte opcion = 0;
-        byte tipoProducto =0;
-        byte seleccionInventario = 0;
-        double ingresosPapelería=0;
-        double saldoRecargas=0;
-        double ingresosRecargas=0;
+        Papeleria LaSierra = new Papeleria();/*Declaración del objeto de tipo papelería 
+        que necesitamos para relizar nuestros metodos  */
+        byte opcion = 0; /*Variable opción para que el usuario por medio de numeros determine que quiere hacer */
+        byte tipoProducto =0; /*Variable para determinar el tipo del producto limitado a 5 tipos */
+        byte seleccionInventario = 0; /*Variable para determinar el tipo de inventario según los tipos de productos */
+        double ingresosPapelería=0;/*Variable que almacena todos los ingresos de ganancias de articulos de papelería */
+        double saldoRecargas=0;/*Variable que almacena el saldo de las ganancias*/
+        double ingresosRecargas=0; /*Variable que almacena el ingreso total de las recargas */
         
         do {
             try {
+                /*Añadimos un try catch en todo nuestro programa 
+                 * con tal de evitar que alguna excepción lo haga reiniciarse
+                 */
             opcion=Byte.parseByte(JOptionPane.showInputDialog("Ingrese el NUMERO correspondiente a la opción"+"\n"+"1.Gestion de inventario"+"\n"+"2.Gestion de clientes"+"\n"+"3.Realizar una venta"+"\n"+"4.Sistema de recargas"+"\n"+"5.Visualizar las ganancias de lo que lleva del día"+"\n"+"6.Cerrar la papelería"));
             switch (opcion) {
-                case 1:
+                case 1://Elección de los 5 distintos menus de acciones
                     opcion=Byte.parseByte(JOptionPane.showInputDialog("BIENVENIDO A GESTION DE INVENTARIO"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Agregar nuevo producto"+"\n"+"2.Agregar unidades a un producto existente"+"\n"+"3.Visualizar el inventario"));
                     switch (opcion) {
-                        case 1:
+                        case 1://Creación de un nuevo objeto de la clase Productos
                         JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        //Esta alerta comprueba que no haya ningun obejto con bajas unidades (Existencias es un atributo) SIEMPRE APARECERA
                                 String nombreProducto = JOptionPane.showInputDialog("Ingrese el nombre del nuevo producto");
                                 if (LaSierra.EncontrarProducto(nombreProducto)) {
+                                    //Atraves del nombre(Nombre es un atributo), se comprueba que el nuevo objeto no haya sido creado antes 
                                     JOptionPane.showMessageDialog(null, "El producto YA EXISTE");
                                 }else{
                                          double precioProducto = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto"));
+                                         //Se solicita el precio del producto (Otro atributo del objeto)
                                 do {
                                     tipoProducto = Byte.parseByte(JOptionPane.showInputDialog("Ingrese un NUMERO para indicar el tipo de producto" + "\n"+
                                     "1. Papeles"+ "\n"+
@@ -31,20 +38,27 @@ public class App {
                                     "3. Adhesivos"+ "\n"+
                                     "4. Cosmeticos"+ "\n"+
                                     "5. Dulces"));
+                                    /*Se solicita el tipo del objeto (Otro atributo)
+                                     * Si el usuario inserta un numero superior al 5 le volvera a pedir este dato
+                                     */
                                  } while(tipoProducto>5);
                                  int existencias = Integer.parseInt(JOptionPane.showInputDialog("Ingrese las unidades del nuevo producto"));
+                                 //Se ingresan las existencias del producto (Otro atributo)
                                 JOptionPane.showMessageDialog(null, LaSierra.NuevoProducto(nombreProducto, precioProducto, tipoProducto, existencias));
+                                //Se crea finalmente el nuevo producto que se almacena en un ArrayList
                                 }
                                
                             break;
 
 
                         case 2:
-                        JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());//misma alerta mencionada anteriormente
                                 nombreProducto=JOptionPane.showInputDialog("Ingrese el nombre del producto al que le sumara unidades");
                                 if (LaSierra.EncontrarProducto(nombreProducto)) {
+                                    //Se comprueba si el producto ya existe, pues no puedes agregarle unidades a algo que no existe
                                     int nuevasExistencias=Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de unidades que desea agregar"));
                                     JOptionPane.showMessageDialog(null, LaSierra.AgregarExistencias(nombreProducto, nuevasExistencias));
+                                    /*Se inserta el número de unidades que se van a almacenar y se agregan al producto */
                                 }else{
                                     JOptionPane.showMessageDialog(null, "El producto NO EXISTE o lo escribio mal");
                                 }
@@ -174,6 +188,7 @@ public class App {
                             JOptionPane.showMessageDialog(null, "La deuda de este cliente es de: "+LaSierra.DeterminarDeduda(id));
                             double saldarDeuda=Double.parseDouble(JOptionPane.showInputDialog("Ingrese la cantidad que quiere abonar paraa saldar la deuda"));
                             JOptionPane.showMessageDialog(null, LaSierra.ModificarDeuda(id, saldarDeuda*-1));
+                            ingresosPapelería+=saldarDeuda;
                         }else{
                             JOptionPane.showMessageDialog(null, "El usuario no presenta deuda");
                         }
@@ -223,7 +238,7 @@ public class App {
                 }
                 break;
                 case 5:
-                    JOptionPane.showMessageDialog(null,"BIENVENIDO A VISUALIZAR GANANCIAS"+"\n"+"Los ingresos de papelería son: "+ingresosPapelería+"\n"+"Sus beneficios son: "+ (ingresosPapelería*0.3)+"\n"+"Los ingresos por recargas son: "+ingresosRecargas+"Sus beneficios son: "+ (ingresosRecargas*0.06)+"\n"+"Sus ingresos totales fueron: "+(ingresosPapelería+ingresosRecargas)+"\n"+"Sus beneficios fueron"+((ingresosPapelería*0.3)+(ingresosRecargas*0.06)));
+                    JOptionPane.showMessageDialog(null,"BIENVENIDO A VISUALIZAR GANANCIAS"+"\n"+"Los ingresos de papelería son: "+ingresosPapelería+"\n"+"Sus beneficios son: "+ (ingresosPapelería*0.3)+"\n"+"Los ingresos por recargas son: "+ingresosRecargas+"\n"+"Sus beneficios son: "+ (ingresosRecargas*0.06)+"\n"+"Sus ingresos totales fueron: "+(ingresosPapelería+ingresosRecargas)+"\n"+"Sus beneficios fueron"+((ingresosPapelería*0.3)+(ingresosRecargas*0.06)));
                 break;
                 
                 default:
@@ -233,7 +248,7 @@ public class App {
                 JOptionPane.showMessageDialog(null,"ERROR 220"+"\n"+ "por favor ingrese un valor valido");
             }
         } while (opcion !=6);
-        JOptionPane.showMessageDialog(null,"BIENVENIDO A VISUALIZAR GANANCIAS"+"\n"+"Los ingresos de papelería son: "+ingresosPapelería+"\n"+"Sus beneficios son: "+ (ingresosPapelería*0.3)+"\n"+"Los ingresos por recargas son: "+ingresosRecargas+"Sus beneficios son: "+ (ingresosRecargas*0.06)+"\n"+"Sus ingresos totales fueron: "+(ingresosPapelería+ingresosRecargas)+"\n"+"Sus beneficios fueron"+((ingresosPapelería*0.3)+(ingresosRecargas*0.06)));
+        JOptionPane.showMessageDialog(null,"BIENVENIDO A VISUALIZAR GANANCIAS"+"\n"+"Los ingresos de papelería son: "+ingresosPapelería+"\n"+"Sus beneficios son: "+ (ingresosPapelería*0.3)+"\n"+"Los ingresos por recargas son: "+ingresosRecargas+"\n"+"Sus beneficios son: "+ (ingresosRecargas*0.06)+"\n"+"Sus ingresos totales fueron: "+(ingresosPapelería+ingresosRecargas)+"\n"+"Sus beneficios fueron"+((ingresosPapelería*0.3)+(ingresosRecargas*0.06)));
         JOptionPane.showMessageDialog(null,"ADIOOOOOS");
     }
     }
