@@ -125,5 +125,37 @@ public String ModificarDeuda(String id,double deuda){
     }
     return "Deuda modificada correctamente,ahora es de: "+deudaTotal;
 }
-
+public String ComprobarUnidades(){
+    String pocasUnidades="";
+    boolean problemasSolucionar=false;
+    for (int i = 0; i < productos.size(); i++) {
+        if (productos.get(i).getTipoProducto()==1) {
+            if (productos.get(i).getExistencias()<=5) {
+                pocasUnidades+=""+productos.get(i).getNombreProducto()+ " tiene solo "+productos.get(i).getExistencias()+"\n";
+                 problemasSolucionar=true;
+            }
+        }else if (productos.get(i).getTipoProducto()==2) {
+            if (productos.get(i).getExistencias()<=5) {
+                pocasUnidades+=""+productos.get(i).getNombreProducto()+ " tiene solo "+productos.get(i).getExistencias()+"\n";
+                problemasSolucionar=true;
+            }
+        }else if (productos.get(i).getTipoProducto()==3) {
+            if (productos.get(i).getExistencias()<=2) {
+                pocasUnidades+=""+productos.get(i).getNombreProducto()+ " tiene solo "+productos.get(i).getExistencias()+"\n";
+                problemasSolucionar=true;
+            }
+        }else if (productos.get(i).getTipoProducto()==4) {
+            if (productos.get(i).getExistencias()<=1) {
+                pocasUnidades+=""+productos.get(i).getNombreProducto()+ " tiene solo "+productos.get(i).getExistencias()+"\n";
+                problemasSolucionar=true;
+            }
+        }else{
+            if (productos.get(i).getExistencias()<=10) {
+                pocasUnidades+=""+productos.get(i).getNombreProducto()+ " tiene solo "+productos.get(i).getExistencias()+"\n";
+                problemasSolucionar=true;
+            }
+        }
+    }
+    return (problemasSolucionar?"ATENCIÓN"+"\n"+"Los siguientes productos tienen pocas unidades"+"\n"+pocasUnidades:"ningun problema de inventario siga con su acción");
+}
 }

@@ -18,6 +18,7 @@ public class App {
                     opcion=Byte.parseByte(JOptionPane.showInputDialog("BIENVENIDO A GESTION DE INVENTARIO"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Agregar nuevo producto"+"\n"+"2.Agregar unidades a un producto existente"+"\n"+"3.Visualizar el inventario"));
                     switch (opcion) {
                         case 1:
+                        JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
                                 String nombreProducto = JOptionPane.showInputDialog("Ingrese el nombre del nuevo producto");
                                 if (LaSierra.EncontrarProducto(nombreProducto)) {
                                     JOptionPane.showMessageDialog(null, "El producto YA EXISTE");
@@ -39,6 +40,7 @@ public class App {
 
 
                         case 2:
+                        JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
                                 nombreProducto=JOptionPane.showInputDialog("Ingrese el nombre del producto al que le sumara unidades");
                                 if (LaSierra.EncontrarProducto(nombreProducto)) {
                                     int nuevasExistencias=Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de unidades que desea agregar"));
@@ -51,6 +53,7 @@ public class App {
 
 
                         case 3:
+                        JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
                             do {
                                 seleccionInventario = Byte.parseByte(JOptionPane.showInputDialog("Ingrese un NUMERO para indicar el tipo de inventario que desea visualizar" + "\n"+
                                 "1. Papeles"+"\n"+
@@ -81,6 +84,7 @@ public class App {
                 opcion=Byte.parseByte(JOptionPane.showInputDialog("BIENVENIDO A GESTION DE CLIENTES"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Agregar nuevo cliente"+"\n"+"2.Visualizar la lista de clientes"));
                 switch (opcion) {
                     case 1:
+                    JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
                     String id = JOptionPane.showInputDialog("Ingrese la id del nuevo cliente");
                     if (LaSierra.EncontrarCliente(id)) {
                         JOptionPane.showMessageDialog(null, "El usuario YA existe");
@@ -92,6 +96,7 @@ public class App {
                         break;
 
                     case 2:
+                    JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
                     JOptionPane.showMessageDialog(null, LaSierra.MostrarClientes());
                     break;
                     default:
@@ -112,6 +117,7 @@ public class App {
                 switch (opcion) {
 
                     case 1:
+                    JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
                     int cantidadComprar=0;
                     String nombreProducto="";
                     double costoInicial=0;
@@ -157,9 +163,11 @@ public class App {
                         }else{
                             JOptionPane.showMessageDialog(null, "No se encontro a un cliente con es ID, vuelva al menú y agreguelo");
                         }
+                        JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
                         break;
 
                     case 2:
+                    JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
                     id=JOptionPane.showInputDialog("Ingrese la id del usuario");
                     if (LaSierra.EncontrarCliente(id)) {
                         if (LaSierra.DeterminarDeudor(id)) {
