@@ -124,7 +124,13 @@ public class App {
                                  nombreProducto = JOptionPane.showInputDialog("Ingrese el nombre del producto a comprar");
                             if (LaSierra.EncontrarProducto(nombreProducto)) {
                                 cantidadComprar = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de unidades a comprar"));
-                                costoInicial+=LaSierra.CalcularCosto(nombreProducto, cantidadComprar);
+                                if (LaSierra.UnidadesSuficientes(nombreProducto, cantidadComprar)==false) {
+                                    JOptionPane.showMessageDialog(null, "NO hay UNIDADES SUFICIENTES");
+                                    cantidadComprar=0;
+                                }else{
+                                    costoInicial+=LaSierra.CalcularCosto(nombreProducto, cantidadComprar);
+                                }
+                                
                             }else{
                                 JOptionPane.showMessageDialog(null,"No se encontro el producto en el inventario");
                             }

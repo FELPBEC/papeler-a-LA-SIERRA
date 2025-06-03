@@ -47,6 +47,17 @@ public double DeterminarDeduda(String id){
     }
     return deuda;
 }
+public boolean UnidadesSuficientes(String nombreProducto,int cantidadComprar){
+    boolean alcanzan=false;
+    for (int i = 0; i < productos.size(); i++) {
+        if (nombreProducto.equalsIgnoreCase(productos.get(i).getNombreProducto())) {
+            if (cantidadComprar<productos.get(i).getExistencias()) {
+                alcanzan=true;
+            }
+        }
+    }
+    return alcanzan;
+}
 public String NuevoCliente(String nombre,String apellido,String id){
     //Se crea un nuevo cliente con su nombre apellido e id
     clientes.add(new Clientes(nombre, apellido, id));
