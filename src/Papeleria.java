@@ -71,7 +71,7 @@ public String MostrarClientes(){
     String listaClientes="";
     /*Muestra la lista de clientes en orden de ingreso al sistema */
     for (int i = 0; i < clientes.size(); i++) {
-        listaClientes+=clientes.get(i).getNombre()+" "+clientes.get(i).getId()+" "+(clientes.get(i).getDineroDeduda()>0?"EL CLIENTE ES DEUDOR, y su deuda es de"+clientes.get(i).getDineroDeduda():"EL CLIENTE NO ES DEUDOR")+"\n";
+        listaClientes+=clientes.get(i).getNombre()+" "+clientes.get(i).getApellido()+"               "+clientes.get(i).getId()+"           "+(clientes.get(i).getDineroDeduda()>0?"EL CLIENTE ES DEUDOR, y su deuda es de"+clientes.get(i).getDineroDeduda():"EL CLIENTE NO ES DEUDOR")+"\n";
     }
     return "Nombre:          id               ¿es deudor? "+"\n"+listaClientes;
 }
@@ -127,35 +127,56 @@ public String ModificarDeuda(String id,double deuda){
 }
 public String ComprobarUnidades(){
     String pocasUnidades="";
-    boolean problemasSolucionar=false;
     for (int i = 0; i < productos.size(); i++) {
         if (productos.get(i).getTipoProducto()==1) {
             if (productos.get(i).getExistencias()<=5) {
                 pocasUnidades+=""+productos.get(i).getNombreProducto()+ " tiene solo "+productos.get(i).getExistencias()+"\n";
-                 problemasSolucionar=true;
             }
         }else if (productos.get(i).getTipoProducto()==2) {
             if (productos.get(i).getExistencias()<=5) {
                 pocasUnidades+=""+productos.get(i).getNombreProducto()+ " tiene solo "+productos.get(i).getExistencias()+"\n";
-                problemasSolucionar=true;
             }
         }else if (productos.get(i).getTipoProducto()==3) {
             if (productos.get(i).getExistencias()<=2) {
                 pocasUnidades+=""+productos.get(i).getNombreProducto()+ " tiene solo "+productos.get(i).getExistencias()+"\n";
-                problemasSolucionar=true;
             }
         }else if (productos.get(i).getTipoProducto()==4) {
             if (productos.get(i).getExistencias()<=1) {
                 pocasUnidades+=""+productos.get(i).getNombreProducto()+ " tiene solo "+productos.get(i).getExistencias()+"\n";
-                problemasSolucionar=true;
             }
         }else{
             if (productos.get(i).getExistencias()<=10) {
                 pocasUnidades+=""+productos.get(i).getNombreProducto()+ " tiene solo "+productos.get(i).getExistencias()+"\n";
+            }
+        }
+    }
+    return "ATENCIÓN"+"\n"+"Los siguientes productos tienen pocas unidades"+"\n"+pocasUnidades;
+}
+public boolean MensajeUnidades(){
+    boolean problemasSolucionar=false;
+    for (int i = 0; i < productos.size(); i++) {
+        if (productos.get(i).getTipoProducto()==1) {
+            if (productos.get(i).getExistencias()<=5) {
+                 problemasSolucionar=true;
+            }
+        }else if (productos.get(i).getTipoProducto()==2) {
+            if (productos.get(i).getExistencias()<=5) {
+                problemasSolucionar=true;
+            }
+        }else if (productos.get(i).getTipoProducto()==3) {
+            if (productos.get(i).getExistencias()<=2) {
+                problemasSolucionar=true;
+            }
+        }else if (productos.get(i).getTipoProducto()==4) {
+            if (productos.get(i).getExistencias()<=1) {
+                problemasSolucionar=true;
+            }
+        }else{
+            if (productos.get(i).getExistencias()<=10) {
                 problemasSolucionar=true;
             }
         }
     }
-    return (problemasSolucionar?"ATENCIÓN"+"\n"+"Los siguientes productos tienen pocas unidades"+"\n"+pocasUnidades:"ningun problema de inventario siga con su acción");
+    return problemasSolucionar;
 }
 }

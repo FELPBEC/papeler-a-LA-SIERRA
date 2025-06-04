@@ -22,7 +22,9 @@ public class App {
                     opcion=Byte.parseByte(JOptionPane.showInputDialog("BIENVENIDO A GESTION DE INVENTARIO"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Agregar nuevo producto"+"\n"+"2.Agregar unidades a un producto existente"+"\n"+"3.Visualizar el inventario"));
                     switch (opcion) {
                         case 1://Creación de un nuevo objeto de la clase Productos
-                        JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        if (LaSierra.MensajeUnidades()) {
+                            JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        }
                         //Esta alerta comprueba que no haya ningun obejto con bajas unidades (Existencias es un atributo) SIEMPRE APARECERA
                                 String nombreProducto = JOptionPane.showInputDialog("Ingrese el nombre del nuevo producto");
                                 if (LaSierra.EncontrarProducto(nombreProducto)) {
@@ -52,7 +54,9 @@ public class App {
 
 
                         case 2:
-                        JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());//misma alerta mencionada anteriormente
+                        if (LaSierra.MensajeUnidades()) {
+                            JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        }//misma alerta mencionada anteriormente
                                 nombreProducto=JOptionPane.showInputDialog("Ingrese el nombre del producto al que le sumara unidades");
                                 if (LaSierra.EncontrarProducto(nombreProducto)) {
                                     //Se comprueba si el producto ya existe, pues no puedes agregarle unidades a algo que no existe
@@ -67,7 +71,9 @@ public class App {
 
 
                         case 3:
-                        JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        if (LaSierra.MensajeUnidades()) {
+                            JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        }
                             do {
                                 seleccionInventario = Byte.parseByte(JOptionPane.showInputDialog("Ingrese un NUMERO para indicar el tipo de inventario que desea visualizar" + "\n"+
                                 "1. Papeles"+"\n"+
@@ -98,7 +104,9 @@ public class App {
                 opcion=Byte.parseByte(JOptionPane.showInputDialog("BIENVENIDO A GESTION DE CLIENTES"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Agregar nuevo cliente"+"\n"+"2.Visualizar la lista de clientes"));
                 switch (opcion) {
                     case 1:
-                    JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                    if (LaSierra.MensajeUnidades()) {
+                            JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        }
                     String id = JOptionPane.showInputDialog("Ingrese la id del nuevo cliente");
                     if (LaSierra.EncontrarCliente(id)) {
                         JOptionPane.showMessageDialog(null, "El usuario YA existe");
@@ -110,7 +118,9 @@ public class App {
                         break;
 
                     case 2:
-                    JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                    if (LaSierra.MensajeUnidades()) {
+                            JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        }
                     JOptionPane.showMessageDialog(null, LaSierra.MostrarClientes());
                     break;
                     default:
@@ -131,7 +141,9 @@ public class App {
                 switch (opcion) {
 
                     case 1:
-                    JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                    if (LaSierra.MensajeUnidades()) {
+                            JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        }
                     int cantidadComprar=0;
                     String nombreProducto="";
                     double costoInicial=0;
@@ -177,11 +189,15 @@ public class App {
                         }else{
                             JOptionPane.showMessageDialog(null, "No se encontro a un cliente con es ID, vuelva al menú y agreguelo");
                         }
-                        JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        if (LaSierra.MensajeUnidades()) {
+                            JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        }
                         break;
 
                     case 2:
-                    JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                    if (LaSierra.MensajeUnidades()) {
+                            JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        }
                     id=JOptionPane.showInputDialog("Ingrese la id del usuario");
                     if (LaSierra.EncontrarCliente(id)) {
                         if (LaSierra.DeterminarDeudor(id)) {
@@ -209,9 +225,15 @@ public class App {
 
 
                 case 4:
+                if (LaSierra.MensajeUnidades()) {
+                            JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        }
                     opcion=Byte.parseByte(JOptionPane.showInputDialog("BIENVENIDO AL SISTEMA DE RECARGAS"+"\n"+"ingrese el NUMERO correspondiente a su acción"+"\n"+"1.Hacer nueva venta"+"\n"+"2.Añadir saldo"));
                     switch (opcion) {
                     case 1:
+                    if (LaSierra.MensajeUnidades()) {
+                            JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        }
                         opcion=Byte.parseByte(JOptionPane.showInputDialog(null, "ATENCIÓN"+"\n"+"Su saldo es de"+saldoRecargas+"\n"+"¿Seguro desea continuar?"+"1.Si"+"2.No"));
                         if (opcion==1) {
                             double costoRecarga=Double.parseDouble(JOptionPane.showInputDialog("Ingrese a continuación la cantidad a recargar"));
@@ -238,7 +260,10 @@ public class App {
                 }
                 break;
                 case 5:
-                    JOptionPane.showMessageDialog(null,"BIENVENIDO A VISUALIZAR GANANCIAS"+"\n"+"Los ingresos de papelería son: "+ingresosPapelería+"\n"+"Sus beneficios son: "+ (ingresosPapelería*0.3)+"\n"+"Los ingresos por recargas son: "+ingresosRecargas+"\n"+"Sus beneficios son: "+ (ingresosRecargas*0.06)+"\n"+"Sus ingresos totales fueron: "+(ingresosPapelería+ingresosRecargas)+"\n"+"Sus beneficios fueron"+((ingresosPapelería*0.3)+(ingresosRecargas*0.06)));
+                if (LaSierra.MensajeUnidades()) {
+                            JOptionPane.showMessageDialog(null, LaSierra.ComprobarUnidades());
+                        }
+                    JOptionPane.showMessageDialog(null,"BIENVENIDO A VISUALIZAR GANANCIAS"+"\n"+"Los ingresos de papelería son: "+ingresosPapelería+"\n"+"Sus beneficios son: "+ (ingresosPapelería*0.3)+"\n"+"Los ingresos por recargas son: "+ingresosRecargas+"\n"+"Sus beneficios son: "+ (ingresosRecargas*0.06)+"\n"+"Sus ingresos totales son: "+(ingresosPapelería+ingresosRecargas)+"\n"+"Sus beneficios son"+((ingresosPapelería*0.3)+(ingresosRecargas*0.06)));
                 break;
                 
                 default:
@@ -248,7 +273,7 @@ public class App {
                 JOptionPane.showMessageDialog(null,"ERROR 220"+"\n"+ "por favor ingrese un valor valido");
             }
         } while (opcion !=6);
-        JOptionPane.showMessageDialog(null,"BIENVENIDO A VISUALIZAR GANANCIAS"+"\n"+"Los ingresos de papelería son: "+ingresosPapelería+"\n"+"Sus beneficios son: "+ (ingresosPapelería*0.3)+"\n"+"Los ingresos por recargas son: "+ingresosRecargas+"\n"+"Sus beneficios son: "+ (ingresosRecargas*0.06)+"\n"+"Sus ingresos totales fueron: "+(ingresosPapelería+ingresosRecargas)+"\n"+"Sus beneficios fueron"+((ingresosPapelería*0.3)+(ingresosRecargas*0.06)));
+        JOptionPane.showMessageDialog(null,"CERRANDO PAPELERÍA"+"\n"+"Los ingresos de papelería fueron: "+ingresosPapelería+"\n"+"Sus beneficios fueron: "+ (ingresosPapelería*0.3)+"\n"+"Los ingresos por recargas fueron: "+ingresosRecargas+"\n"+"Sus beneficios fueron: "+ (ingresosRecargas*0.06)+"\n"+"Sus ingresos totales fueron: "+(ingresosPapelería+ingresosRecargas)+"\n"+"Sus beneficios fueron"+((ingresosPapelería*0.3)+(ingresosRecargas*0.06)));
         JOptionPane.showMessageDialog(null,"ADIOOOOOS");
     }
     }
